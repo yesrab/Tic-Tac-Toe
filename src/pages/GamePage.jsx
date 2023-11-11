@@ -5,8 +5,17 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainMenu from "../components/MainMenu";
 import PlayArea from "./PlayArea";
 
-function GamePage({ setTrigger, setToastText }) {
-  const [player, setPlayer] = useState("O");
+function GamePage() {
+  const [player, setPlayer] = useState(playerChoice());
+
+  function playerChoice() {
+    const playerOptionExists = localStorage.getItem("playerOption");
+    if (playerOptionExists) {
+      return playerOptionExists;
+    } else {
+      return "O";
+    }
+  }
 
   useEffect(() => {
     const playerOptionExists = localStorage.getItem("playerOption");
