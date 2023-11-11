@@ -21,17 +21,7 @@ function GamePage({ setTrigger, setToastText }) {
     <div className='gameBox'>
       <BrowserRouter>
         <Routes>
-          <Route
-            path='/'
-            element={
-              <MainMenu
-                setToastText={setToastText}
-                setTrigger={setTrigger}
-                setPlayer={setPlayer}
-                player={player}
-              />
-            }
-          />
+          <Route path='/' element={<MainMenu setPlayer={setPlayer} player={player} />} />
           <Route path='/game' element={<PlayArea player={player} />} />
         </Routes>
       </BrowserRouter>
