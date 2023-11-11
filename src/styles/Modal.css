@@ -1,0 +1,64 @@
+.modalBackground {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: hsla(0, 0%, 0%, 0.73);
+  border-radius: 2em;
+}
+.modalContainer {
+  width: 100%;
+  height: 30%;
+  background-color: hsl(199, 33%, 15%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.body {
+  color: var(--forground-btn-secondary);
+}
+
+.footer {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.modalBtns {
+  width: 40%;
+  height: 50%;
+  background-color: var(--forground-btn-primary);
+  border: none;
+  color: var(--colour-clickable-item);
+  font-weight: 800;
+  font-size: 1em;
+  border-radius: 0.3em;
+  cursor: pointer;
+}
+
+.quitBtn {
+  background-color: var(--forground-btn-secondary);
+  width: 100%;
+  height: 100%;
+}
+.linkcenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}

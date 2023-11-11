@@ -1,0 +1,17 @@
+.ReloadBtn {
+  display: flex;
+  align-items: center;
+  text-align: end;
+  justify-self: end;
+  margin: 1em;
+  width: 2em;
+  aspect-ratio: 1/1;
+  border-radius: 0.5em;
+  background-color: #a7bdc8;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  cursor: pointer;
+  background-image: url(../assets/reload.svg);
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: center;
+}

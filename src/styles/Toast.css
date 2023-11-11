@@ -1,0 +1,15 @@
+.ToastContainer {
+  display: flex;
+  position: absolute;
+  width: 20vw;
+  height: 5vh;
+  right: 1em;
+  color: var(--forground-btn-secondary);
+  background-color: var(--main-bag-color);
+  font-size: 12px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1em;
+  align-self: flex-start;
+}

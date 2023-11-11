@@ -1,0 +1,41 @@
+* {
+  font-family: "DM Sans", sans-serif;
+
+  box-sizing: border-box;
+}
+:root {
+  --main-bag-color: #192a32;
+  --forground-btn-primary-hue: 180;
+  --forground-btn-primary-lightness: 48%;
+  --forground-btn-primary: hsl(
+    var(--forground-btn-primary-hue),
+    59%,
+    var(--forground-btn-primary-lightness)
+  );
+  --forground-btn-primary-dark: hsl(
+    var(--forground-btn-primary-hue),
+    60%,
+    var(--forground-btn-primary-lightness)
+  );
+  --forground-btn-secondary: hsl(39, 88%, 58%);
+  --forground-texture: hsl(0, 0%, 85%);
+  --colour-clickable-item: #1f3540;
+}
+
+html,
+body,
+#app,
+#app > div {
+  height: 99%;
+}
+
+#root {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  height: inherit;
+  justify-content: start;
+  gap: 20%;
+}

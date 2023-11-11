@@ -1,0 +1,17 @@
+.turnIndicator {
+  display: flex;
+  color: #acc2cd;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  background-color: var(--colour-clickable-item);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  font-family: "DM Sans";
+  font-weight: 800;
+  font-size: small;
+  border-radius: 1em;
+  height: 3em;
+  width: 6em;
+  margin: 1em;
+}
