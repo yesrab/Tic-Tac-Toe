@@ -149,9 +149,13 @@ function PlayArea({ player }) {
       } else if (tryWinPosition !== undefined) {
         CPUmove(tryWinPosition);
       } else {
-        const randomIndex =
-          emptyIndexes[Math.floor(Math.random() * emptyIndexes.length)];
-        CPUmove(randomIndex);
+        if (squares[4] === null) {
+          CPUmove(4);
+        } else {
+          const randomIndex =
+            emptyIndexes[Math.floor(Math.random() * emptyIndexes.length)];
+          CPUmove(randomIndex);
+        }
       }
     }
   }, [squares]);
