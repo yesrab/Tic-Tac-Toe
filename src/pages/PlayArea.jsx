@@ -25,7 +25,6 @@ function PlayArea({ player }) {
   const computerSymbol = player == "O" ? "X" : "O";
   let cpuPermission = true;
   let humanPermission = true;
-  // console.log("loop check");
   const [scores, setScores] = useState(scoreRetreval());
   const [showModal, setShowModal] = useState(false);
   function scoreRetreval() {
@@ -122,7 +121,6 @@ function PlayArea({ player }) {
     }
     function CPUmove(index) {
       setTimeout(() => {
-        console.log("test inside cpumove");
         let newSquares = squares;
         newSquares[index] = computerSymbol;
         setSquares([...newSquares]);
