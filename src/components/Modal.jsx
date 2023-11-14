@@ -8,7 +8,14 @@ function Modal({ winnerName, alertText, setGamestate, setSquares, setShowModal }
     setSquares(defaultSquares());
     setShowModal(false);
   }
-
+  function reSetScore() {
+    const scoretemplate = {
+      CPU: 0,
+      USER: 0,
+      TIE: 0,
+    };
+    localStorage.setItem("savedScore", JSON.stringify(scoretemplate));
+  }
   return (
     <div className='modalBackground'>
       <div className='modalContainer'>
@@ -19,7 +26,7 @@ function Modal({ winnerName, alertText, setGamestate, setSquares, setShowModal }
           <h3>{alertText}</h3>
         </div>
         <div className='footer'>
-          <Link className='modalBtns linkcenter' to='/'>
+          <Link onClick={reSetScore} className='modalBtns linkcenter' to='/'>
             <button className='modalBtns quitBtn'>QUIT</button>
           </Link>
 

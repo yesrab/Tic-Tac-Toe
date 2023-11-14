@@ -19,7 +19,12 @@ export const useQuotes = () => {
   };
 
   useEffect(() => {
-    getQuote();
+    const controller = new AbortController();
+    const signal = controller.signal;
+    getQuote(signal);
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   return { quote, getQuote };

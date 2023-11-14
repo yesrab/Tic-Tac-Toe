@@ -22,9 +22,10 @@ function PlayArea({ player }) {
   const [squares, setSquares] = useState(defaultSquares());
   const [curentPlayer, setCurrentPlayer] = useState(player);
   const [gameState, setGamestate] = useState(true);
+  const computerSymbol = player == "O" ? "X" : "O";
   let cpuPermission = true;
   let humanPermission = true;
-
+  // console.log("loop check");
   const [scores, setScores] = useState(scoreRetreval());
   const [showModal, setShowModal] = useState(false);
   function scoreRetreval() {
@@ -69,7 +70,7 @@ function PlayArea({ player }) {
 
         if (!newSquares[index]) {
           newSquares[index] = player;
-          setCurrentPlayer(player == "O" ? "X" : "O");
+          setCurrentPlayer(computerSymbol);
         }
         return newSquares;
       });
@@ -77,9 +78,16 @@ function PlayArea({ player }) {
   };
 
   useEffect(() => {
-    const computerSymbol = player == "O" ? "X" : "O";
-    const CPUturn = squares.filter((square) => square !== null).length % 2 === 1;
-    const doseNullExists = squares.includes(null);
+    const isHumanTurn = squares.filter((square) => square !== null).length % 2 === 0;
+    const doesNullExist = squares.includes(null);
+
+    const findEmptyIndex = (indexes) => {
+      if (indexes) {
+        return indexes.find((index) => squares[index] === null);
+      }
+      return undefined;
+    };
+
     const squence = (a, b, c) => {
       return WinnerPattern.filter((squareIndexes) => {
         const squareValues = squareIndexes.map((index) => squares[index]);
@@ -88,52 +96,61 @@ function PlayArea({ player }) {
     };
 
     const humanWon = squence(player, player, player).length > 0;
-    const CPUwon = squence(computerSymbol, computerSymbol, computerSymbol).length > 0;
+    const computerWon =
+      squence(computerSymbol, computerSymbol, computerSymbol).length > 0;
     const tie =
-      !doseNullExists &&
+      !doesNullExist &&
       !humanWon &&
-      !CPUwon &&
+      !computerWon &&
       squares.filter((square) => square === null).length === 0;
 
     if (humanWon) {
-      // alert("user won");
       setScores((prev) => ({ ...prev, USER: prev.USER + 1 }));
-      cpuPermission = false;
       handelModal("YOU WON", `${computerSymbol} TAKES THE ROUND`);
     }
-    if (CPUwon) {
-      // alert("cpu won");
+    if (computerWon) {
       setScores((prev) => ({ ...prev, CPU: prev.CPU + 1 }));
       setGamestate(false);
-      humanPermission = false;
       handelModal("YOU LOST", `${player} TAKES THE ROUND`);
     }
 
     if (tie) {
-      // alert("no moves are possible TIE");
       setScores((prev) => ({ ...prev, TIE: prev.TIE + 1 }));
-      humanPermission = false;
-      cpuPermission = false;
       handelModal("GAME TIE", "GAME TIED");
     }
-    if (CPUturn && doseNullExists && cpuPermission) {
+    function CPUmove(index) {
+      setTimeout(() => {
+        console.log("test inside cpumove");
+        let newSquares = squares;
+        newSquares[index] = computerSymbol;
+        setSquares([...newSquares]);
+        setCurrentPlayer(player);
+      }, 500);
+    }
+    if (!isHumanTurn && doesNullExist && cpuPermission) {
       const emptyIndexes = squares
         .map((square, index) => (square === null ? index : null))
         .filter((val) => val !== null);
-      const computerIndex =
-        emptyIndexes[Math.floor(Math.random() * emptyIndexes.length)];
 
-      const cpuTimeoutID = setTimeout(() => {
-        setSquares((prevSquares) => {
-          const newSquares = [...prevSquares];
-          newSquares[computerIndex] = computerSymbol;
-          setCurrentPlayer(player);
+      const CPUwinMove = squence(computerSymbol, computerSymbol, null);
+      const blockHuman = squence(player, player, null);
+      const attemptToWin = squence(computerSymbol, null, null);
 
-          return newSquares;
-        });
-      }, 500);
+      const winPosition = findEmptyIndex(CPUwinMove[0]);
+      const blockPosition = findEmptyIndex(blockHuman[0]);
+      const tryWinPosition = findEmptyIndex(attemptToWin[0]);
 
-      return () => clearTimeout(cpuTimeoutID);
+      if (winPosition !== undefined) {
+        CPUmove(winPosition);
+      } else if (blockPosition !== undefined) {
+        CPUmove(blockPosition);
+      } else if (tryWinPosition !== undefined) {
+        CPUmove(tryWinPosition);
+      } else {
+        const randomIndex =
+          emptyIndexes[Math.floor(Math.random() * emptyIndexes.length)];
+        CPUmove(randomIndex);
+      }
     }
   }, [squares]);
 

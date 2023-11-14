@@ -119,6 +119,7 @@
   font-weight: 800;
   text-decoration: none;
   align-items: center;
+  cursor: pointer;
 }
 .gameBtnsBlue {
   background-color: var(--forground-btn-primary);
