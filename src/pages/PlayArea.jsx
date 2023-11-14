@@ -106,12 +106,14 @@ function PlayArea({ player }) {
 
     if (humanWon) {
       setScores((prev) => ({ ...prev, USER: prev.USER + 1 }));
-      handelModal("YOU WON", `${computerSymbol} TAKES THE ROUND`);
+      setGamestate(false);
+      cpuPermission = false;
+      handelModal("YOU WON", `${player} TAKES THE ROUND`);
     }
     if (computerWon) {
       setScores((prev) => ({ ...prev, CPU: prev.CPU + 1 }));
       setGamestate(false);
-      handelModal("YOU LOST", `${player} TAKES THE ROUND`);
+      handelModal("YOU LOST", `${computerSymbol} TAKES THE ROUND`);
     }
 
     if (tie) {
@@ -127,7 +129,7 @@ function PlayArea({ player }) {
         setCurrentPlayer(player);
       }, 500);
     }
-    if (!isHumanTurn && doesNullExist && cpuPermission) {
+    if (!isHumanTurn && doesNullExist && cpuPermission && gameState) {
       const emptyIndexes = squares
         .map((square, index) => (square === null ? index : null))
         .filter((val) => val !== null);
