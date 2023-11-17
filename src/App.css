@@ -39,3 +39,9 @@ body,
   justify-content: start;
   gap: 20%;
 }
+
+@media only screen and (max-width: 767px) {
+  * {
+    overflow: hidden;
+  }
+}

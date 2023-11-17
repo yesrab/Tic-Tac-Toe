@@ -146,3 +146,56 @@
   min-width: 21vw;
   justify-content: center;
 }
+
+@media only screen and (max-width: 767px) {
+  .container {
+    flex-direction: column;
+    margin: 0;
+    gap: 1em;
+  }
+  .GameContainer {
+    top: -2vh;
+  }
+  .gameBox {
+    min-width: 95vw;
+    height: 95vh;
+    max-height: none;
+    align-self: center;
+    border-radius: 1em;
+    margin: none;
+  }
+
+  .gameNavigator {
+    width: 100%;
+    min-width: 21vw;
+    height: 100vh;
+    margin: 1em 0;
+  }
+
+  .pickerWindow {
+    /* margin: 1em 0; */
+    width: 100%;
+    height: 30%;
+  }
+
+  .buttonHouse {
+    width: 60%;
+    height: 30%;
+    margin: 2em;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .buttonHouse button {
+    width: 100%;
+    height: 70%;
+    margin: 0.5em;
+    justify-content: center;
+  }
+
+  .playGrid {
+    height: auto;
+    min-width: auto;
+  }
+}
