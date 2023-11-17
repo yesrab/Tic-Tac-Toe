@@ -2,11 +2,33 @@ import React from "react";
 import "../styles/Modal.css";
 import { defaultSquares } from "../pages/PlayArea";
 import { Link } from "react-router-dom";
-function Modal({ winnerName, alertText, setGamestate, setSquares, setShowModal }) {
+function Modal({
+  setScores,
+  btnName,
+  winnerName,
+  alertText,
+  setGamestate,
+  setSquares,
+  setShowModal,
+}) {
   function handlePlayAgain() {
-    setGamestate(true);
-    setSquares(defaultSquares());
-    setShowModal(false);
+    console.log(btnName.current);
+    if (btnName.current === "PLAY AGAIN") {
+      reSetScore();
+      setScores({
+        CPU: 0,
+        USER: 0,
+        TIE: 0,
+      });
+      setGamestate(true);
+      setSquares(defaultSquares());
+      setShowModal(false);
+    }
+    if (btnName.current === "NEXT ROUND") {
+      setGamestate(true);
+      setSquares(defaultSquares());
+      setShowModal(false);
+    }
   }
   function reSetScore() {
     const scoretemplate = {
@@ -16,6 +38,7 @@ function Modal({ winnerName, alertText, setGamestate, setSquares, setShowModal }
     };
     localStorage.setItem("savedScore", JSON.stringify(scoretemplate));
   }
+
   return (
     <div className='modalBackground'>
       <div className='modalContainer'>
@@ -29,9 +52,8 @@ function Modal({ winnerName, alertText, setGamestate, setSquares, setShowModal }
           <Link onClick={reSetScore} className='modalBtns linkcenter' to='/'>
             <button className='modalBtns quitBtn'>QUIT</button>
           </Link>
-
           <button onClick={handlePlayAgain} className='modalBtns'>
-            PLAY AGAIN
+            {btnName.current}
           </button>
         </div>
       </div>

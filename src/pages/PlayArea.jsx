@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import LogoBox from "../components/LogoBox";
 import TurnIndicator from "../components/TurnIndicator";
 import ReloadBtn from "../components/ReloadBtn";
@@ -19,6 +19,7 @@ const WinnerPattern = [
   [2, 4, 6],
 ];
 function PlayArea({ player }) {
+  const btnName = useRef("NEXT ROUND");
   const [squares, setSquares] = useState(defaultSquares());
   const [curentPlayer, setCurrentPlayer] = useState(player);
   const [gameState, setGamestate] = useState(true);
@@ -46,6 +47,7 @@ function PlayArea({ player }) {
   const handelResetBtn = () => {
     winnerName = "";
     alertText = "Do you want to quit ?";
+    btnName.current = "PLAY AGAIN";
     setShowModal(true);
   };
 
@@ -53,10 +55,12 @@ function PlayArea({ player }) {
     if (gameStatus === "YOU WON" || gameStatus === "YOU LOST") {
       winnerName = gameStatus;
       alertText = Message;
+      btnName.current = "NEXT ROUND";
       setShowModal(true);
     } else if (gameStatus === "GAME TIE") {
       winnerName = "GAME TIE";
       alertText = "DO YOU WANT TO PLAY AGAIN?";
+      btnName.current = "NEXT ROUND";
       setShowModal(true);
     }
   };
@@ -187,6 +191,8 @@ function PlayArea({ player }) {
       </div>
       {showModal && (
         <Modal
+          setScores={setScores}
+          btnName={btnName}
           alertText={alertText}
           winnerName={winnerName}
           setGamestate={setGamestate}
